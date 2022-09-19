@@ -35,12 +35,22 @@ contract MutantAureliusAurei is ERC721 {
     address private _ownerAddress;
     mapping (address => bool) private _shitlist;
     mapping (address => bool) private _allowlist;
+    mapping (address => bool) private _extendedownerlist;	
 
     constructor() ERC721("Mutant Aurelius Aurei", "MAA") {
         
-        //TODO: come up with basic URI for where we're storing metadata
+        //TODO: update with real IPFS link
         _baseTokenURI = "ipfs://loremipsum/";
         _ownerAddress = msg.sender; // deployer is permanent owner
+
+        // shitlist addresses at time of contract deploy
+        _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
+        _shitlist[0x385375FD99D6019c630b1315D3815BB162Aa039e] = true; // soby.eth
+        _shitlist[0x90F79bf6EB2c4f870365E785982E1f101E93b906] = true; // for testing purposes
+
+        // list of folks who can manage owner-managed tokens	
+        _extendedownerlist[_ownerAddress] = true;	
+        _extendedownerlist[0x5A97d44De4fE69E194541a4d78db37218872D859] = true;
 
         _contractIsPaused = false;
         _allowListActive = true;
@@ -51,15 +61,10 @@ contract MutantAureliusAurei is ERC721 {
         // after initial mint, ensure we deploy as paused
         _contractIsPaused = true;
 
-        // shitlist addresses at time of contract deploy
-        _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
-        _shitlist[0x385375FD99D6019c630b1315D3815BB162Aa039e] = true; // soby.eth
-        _shitlist[0x90F79bf6EB2c4f870365E785982E1f101E93b906] = true; // for testing purposes
-
     }
 
     // public function to mint aurei; mints the next available Aureus
-    function mint() public payable {
+    function mint() public {
         
         // require that contract isn't paused when minting
         require(!_contractIsPaused, "SOON");
@@ -75,7 +80,7 @@ contract MutantAureliusAurei is ERC721 {
     }
 
     // public function to mint a favorite Aureus, provided it hasn't been claimed yet; only available in allowlist phase
-    function mintFavorite(uint256 tokenId) public payable {
+    function mintFavorite(uint256 tokenId) public {
         // require that contract isn't paused when minting
         require(!_contractIsPaused, "SOON");
 
@@ -152,9 +157,9 @@ contract MutantAureliusAurei is ERC721 {
         /// check to make sure they're not on our shitlist 
         require(_shitlist[to] != true, "NONE FOR YOU");
 
-        // check to make sure only owner can transfer owner managed coins
-        if(_isOwnerManaged(tokenId)) {
-            require(msg.sender == _ownerAddress, "Only Mutant Aurelius can bestow owner his favor upon the masses.");
+        // check to make sure only extendedownerlist can transfer owner managed coins	
+        if(_isOwnerManaged(tokenId)) {	
+            require(_extendedownerlist[msg.sender] == true, "Only Mutant Aurelius can bestow owner his favor upon the masses.");	
         } 
 
         super._beforeTokenTransfer(from, to, tokenId);
@@ -201,6 +206,11 @@ contract MutantAureliusAurei is ERC721 {
         return _shitlist[questionedAddress]; 
     }
 
+    // returns if address is on the _extendedownerlist	
+    function isOnExtendedOwnerList(address questionedAddress) public view returns (bool) {	
+        return _extendedownerlist[questionedAddress]; 	
+    }
+
     // returns total minted aurei
     function getTotalAureiMinted() public view returns (uint256) {
         return _totalAureiMinted.current();
@@ -212,6 +222,11 @@ contract MutantAureliusAurei is ERC721 {
         return _ownerAddress;
     }
 
+    // returns 888 as total number of Aurei, but the contract technically mints more via Mementos	
+    function totalSupply() public view returns (uint256) {	
+        return 888;	
+    }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     ///// Owner general management funtions
@@ -220,6 +235,17 @@ contract MutantAureliusAurei is ERC721 {
         require(msg.sender == _ownerAddress, "Impostors to the throne embarrass only themselves.");
         _;
     }
+
+    // extending OwnerOnlyACL in some cases to include a slightly broader set of folks	
+    modifier extendedOwnerOnlyACL() {	
+        // only MA affiliated addresses can call this function	
+        require(_extendedownerlist[msg.sender] == true, "Impostors to the throne embarrass only themselves.");	
+        _;	
+    }	
+    // Update the extended Owner list 	
+    function updateExtendedOwnerList(address _extendedOwnerAddress, bool isExtendedOwner) public ownerOnlyACL {	
+        _extendedownerlist[_extendedOwnerAddress] = isExtendedOwner; 	
+    } 	
 
     // set paused state
     function ownerSetPausedState(bool contractIsPaused) public ownerOnlyACL {
@@ -278,9 +304,10 @@ contract MutantAureliusAurei is ERC721 {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ///// Owner token management functions 
+    ///// Small Council token management functions 
 
-    function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public ownerOnlyACL {
+    // setting this to public but requiring it to be on the ownerManageList, so only MA-affiliated addresses can manage these functions	
+    function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public extendedOwnerOnlyACL {
         // only tokens designated as owner managed can be managed by owner
 
         require(_isOwnerManaged(tokenId), "@MutantAurelius - check your token ID again. Something isn't right.");

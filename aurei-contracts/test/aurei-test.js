@@ -117,6 +117,12 @@ describe("MutantAureliusAurei", function () {
 
     });
 
+    it("contract deploys with correct totalSupply count", async function() {	
+      expect(	
+        await contractReadOnly.totalSupply()	
+      ).to.equal(BigNumber.from(888));	
+    });
+
   });
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -754,6 +760,82 @@ describe("MutantAureliusAurei", function () {
 
   
   });
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  describe("Owner Management", function() {	
+    beforeEach(async function () {	
+  	
+      await contractAsOwner.ownerSetPausedState(false);	
+      await contractAsOwner.ownerSetAllowlistActive(false);	
+  	
+    });	
+    it("extended owner can transfer owner-managed coins", async function() {	
+  	
+      expect(	
+        await contractReadOnly.ownerOf(6)	
+      ).to.equal(signerOwner.address); // check that #6 is in owner's wallet first	
+      // set signer 1 as extended owner	
+      await contractAsOwner.updateExtendedOwnerList(signerUser1.address, true);	
+      	
+      await contractAsUser1.ownerSetNewTokenOwner(6, signerUser2.address); // user1 (new extended owner) sends #6 to user2	
+      expect(	
+        await contractReadOnly.ownerOf(6)	
+      ).to.equal(signerUser2.address); // check that #6 is in user1's wallet	
+  	
+    });	
+    it("non-extended owner can't transfer owner-managed coins", async function() {	
+      	
+      expect(	
+        await contractReadOnly.ownerOf(6)	
+      ).to.equal(signerOwner.address); // check that #6 is in owner's wallet first	
+      await expect(	
+        contractAsUser1.ownerSetNewTokenOwner(6, signerUser2.address) 	
+      ).to.be.revertedWith(revertStringMustBeOwner);	
+    });	
+    it("extended owner can't do other owner managed functions", async function() {	
+      // set signer 1 as extended owner	
+      await contractAsOwner.updateExtendedOwnerList(signerUser1.address, true);	
+      await expect(	
+        contractAsUser1.ownerSetBaseTokenURI("checkingIfIHaveThePower")	
+      ).to.be.revertedWith(revertStringMustBeOwner);	
+    });	
+    it("extended owner can still do things like mint and transfer", async function() {	
+      // set signer 1 as extended owner	
+      await contractAsOwner.updateExtendedOwnerList(signerUser1.address, true);	
+      	
+      await contractAsUser1.mint();	
+      // check that user1's wallet is empty	
+      expect(	
+        await contractReadOnly.balanceOf(signerUser1.address)	
+      ).to.equal(BigNumber.from(1));	
+      await contractAsUser1.transferFrom(signerUser1.address, signerUser2.address, 8);	
+      expect(	
+        await contractReadOnly.ownerOf(8)	
+      ).to.equal(signerUser2.address); // check that #6 is in user1's wallet	
+    });	
+    it("revoking extened owner status results in not being able to transfer owner managed", async function() {	
+      	
+      expect(	
+        await contractReadOnly.ownerOf(6)	
+      ).to.equal(signerOwner.address); // check that #6 is in owner's wallet first	
+      // set signer 1 as extended owner	
+      await contractAsOwner.updateExtendedOwnerList(signerUser1.address, true);	
+      	
+      await contractAsUser1.ownerSetNewTokenOwner(6, signerUser2.address); // user1 (new extended owner) sends #6 to user2	
+      expect(	
+        await contractReadOnly.ownerOf(6)	
+      ).to.equal(signerUser2.address); // check that #6 is in user1's wallet	
+      // revoke signer 1 as extended owner	
+      await contractAsOwner.updateExtendedOwnerList(signerUser1.address, false);	
+      await expect(	
+        contractAsUser1.ownerSetNewTokenOwner(6, signerUser2.address) 	
+      ).to.be.revertedWith(revertStringMustBeOwner); // should fail because Signer1 has had permissions revoked	
+    });	
+  });	
+
+
+
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

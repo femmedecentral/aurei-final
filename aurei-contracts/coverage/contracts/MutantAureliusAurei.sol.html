@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/MutantAureliusAurei.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> MutantAureliusAurei.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.32% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>56/62</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70.73% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>58/82</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">83.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>25/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88.89% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>72/81</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">906×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">904×</span>
+<span class="cline-any cline-yes">103×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">901×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">911×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">910×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">907×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">906×</span>
+<span class="cline-any cline-yes">905×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">906×</span>
+<span class="cline-any cline-yes">906×</span>
+<span class="cline-any cline-yes">896×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">903×</span>
+<span class="cline-any cline-yes">903×</span>
+<span class="cline-any cline-yes">903×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-yes">129×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1969×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1969×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1967×</span>
+<span class="cline-any cline-yes">1050×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1966×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2715×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">917×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-yes">95×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1984×</span>
+<span class="cline-any cline-yes">1067×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.4;
+&nbsp;
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+&nbsp;
+import "hardhat/console.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+&nbsp;
+contract MutantAureliusAurei is ERC721 {
+&nbsp;
+    // counters is a safe way of counting that can only be +/- by one
+    // https://docs.openzeppelin.com/contracts/4.x/api/utils#Counters
+    using Counters for Counters.Counter;
+    Counters.Counter private _aureindexCounter;
+    Counters.Counter private _mementosIssuedCounter;
+    Counters.Counter private _totalAureiMinted; 
+&nbsp;
+    // traditionally we'd include SafeMath here, but safemath is no longer necessary in solidity 0.8.0+
+    // https://docs.openzeppelin.com/contracts/4.x/api/utils
+    // using SafeMath for uint256;
+&nbsp;
+    uint256 private MAX_MINTABLE_AT_ONCE = 1; 
+&nbsp;
+    // The fixed amount of Aurei tokens stored in an unsigned integer type variable.
+    uint256 public totalAureiSupply = 888;
+    uint256 public initialOwnerManagedTokens = 7;
+&nbsp;
+    // these are private because we write getters for them, no need to make them readable as-is
+    string private _baseTokenURI;
+&nbsp;
+    // bool to pause contract; set to pause immediately after initial owner controlled tokens are minted to prevent premature public minting
+    bool private _contractIsPaused;
+    bool private _allowListActive;
+    address private _ownerAddress;
+    mapping (address =&gt; bool) private _shitlist;
+    mapping (address =&gt; bool) private _allowlist;
+    mapping (address =&gt; bool) private _extendedownerlist;	
+&nbsp;
+    constructor() ERC721("Mutant Aurelius Aurei", "MAA") {
+        
+        //TODO: update with real IPFS link
+        _baseTokenURI = "ipfs://loremipsum/";
+        _ownerAddress = msg.sender; // deployer is permanent owner
+&nbsp;
+        // shitlist addresses at time of contract deploy
+        _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
+        _shitlist[0x385375FD99D6019c630b1315D3815BB162Aa039e] = true; // soby.eth
+        _shitlist[0x90F79bf6EB2c4f870365E785982E1f101E93b906] = true; // for testing purposes
+&nbsp;
+        // list of folks who can manage owner-managed tokens	
+        _extendedownerlist[_ownerAddress] = true;	
+        _extendedownerlist[0x5A97d44De4fE69E194541a4d78db37218872D859] = true;
+&nbsp;
+        _contractIsPaused = false;
+        _allowListActive = true;
+&nbsp;
+        // Tokens ID #1-7 &amp; #888 are to be initially owned by contract owner
+        _mintOwnerManaged();
+&nbsp;
+        // after initial mint, ensure we deploy as paused
+        _contractIsPaused = true;
+&nbsp;
+    }
+&nbsp;
+    // public function to mint aurei; mints the next available Aureus
+    function mint() public {
+        
+        // require that contract isn't paused when minting
+        require(!_contractIsPaused, "SOON");
+&nbsp;
+        // require that user is on allowlist if allowlist is enabled
+        if (_allowListActive) {
+            require(_allowlist[msg.sender] == true, "You're not on the list.");
+        }
+&nbsp;
+        //TODO: Do we need to do a check for minimum cost to mint?
+        // using tokenId = 0 to specify that we just want the next one, since solidity doens't offer optional params
+        _mintAureiWithChecks(msg.sender, 0);
+    }
+&nbsp;
+    // public function to mint a favorite Aureus, provided it hasn't been claimed yet; only available in allowlist phase
+    function mintFavorite(uint256 tokenId) public {
+        // require that contract isn't paused when minting
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!_contractIsPaused, "SOON");
+&nbsp;
+        // require that allowlist phase is on
+        require(_allowListActive, "Allowlisting isn't enabled. Picking favorites is a thing of the past.");
+&nbsp;
+        // require that user is on allowlist
+        require(_allowlist[msg.sender] == true, "You're not on the list.");
+&nbsp;
+        // require that favorite token is within range
+        // TODO: update text
+        require(tokenId &lt; 888, "You're trying to mint an Aureus outside the set");
+&nbsp;
+        // require that tokenID isn't already minted()
+        // TODO: do I need to worry about a race condition here?
+        // TODO: update text
+        require(!_exists(tokenId), "You have great taste; someone else has already minted your favorite.");
+&nbsp;
+        _mintAureiWithChecks(msg.sender, tokenId);
+    }
+&nbsp;
+    // for minting aurei w/ contract specific checks
+    function _mintAureiWithChecks(address _mintAddress, uint256 tokenId) internal {
+        /// ensure we aren't minting beyond the limit
+        require(getTotalAureiMinted() &lt; totalAureiSupply, "Many have come before you. Too many, in fact.");
+&nbsp;
+        /// ensure only one per wallet; current balance is zero aurei in the wallet, only enabling as courtesy
+        // TODO: make sure text is still good given update
+        require(balanceOf(msg.sender) &lt; MAX_MINTABLE_AT_ONCE, "One can pledge one\'s loyalty only so many times.");
+&nbsp;
+        /// check to make sure they're not on our shitlist
+        require(_shitlist[_mintAddress] != true, "NONE FOR YOU");
+&nbsp;
+        // increment before minting
+        // must ensure that the counter is aligned to next available slot, since we're allowing folks to mint out of order
+        while (_exists(getIndexedAureiCount()) == true) { 
+            _aureindexCounter.increment();
+        }
+&nbsp;
+        // provided all basic checks are cleared, mint it!
+        _totalAureiMinted.increment(); // increment total minted
+        if (tokenId == 0) {
+            _mint(_mintAddress, getIndexedAureiCount()); // if tokenId is unspecified
+        } else {
+            _mint(_mintAddress, tokenId); // mint a specific token
+        }
+&nbsp;
+    }
+&nbsp;
+    // for minting the initial Owner Managed tokens
+    function _mintOwnerManaged() internal {
+        // require that contract isn't paused when minting
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!_contractIsPaused, "SOON");
+&nbsp;
+        // Tokens ID 1 - 7 and #888 are to be initially owned by contract owner
+        for (uint256 mt = 1; mt &lt;= initialOwnerManagedTokens; mt++) {
+            _aureindexCounter.increment();
+            _totalAureiMinted.increment();
+            _mint(_ownerAddress, mt);
+        }
+        // minting femmedecentral@ token; don't incremental tokens because it'll cause numbesr to start @ 8 instead of 7 issued tokens
+        _totalAureiMinted.increment();
+        _mint(_ownerAddress, 888);
+    }
+&nbsp;
+    ////// Transfer modifications
+&nbsp;
+    // override the _beforeTokenTransfer hook to check our local paused variable, check the shitlist, and if owner managed
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal override {
+&nbsp;
+        // check that contract isn't paused
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!_contractIsPaused, "SOON");
+&nbsp;
+        /// check to make sure they're not on our shitlist 
+        require(_shitlist[to] != true, "NONE FOR YOU");
+&nbsp;
+        // check to make sure only extendedownerlist can transfer owner managed coins	
+        if(_isOwnerManaged(tokenId)) {	
+            require(_extendedownerlist[msg.sender] == true, "Only Mutant Aurelius can bestow owner his favor upon the masses.");	
+        } 
+&nbsp;
+        super._beforeTokenTransfer(from, to, tokenId);
+&nbsp;
+    }
+&nbsp;
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+&nbsp;
+    // simple getters
+&nbsp;
+    // this overrides the inherited _baseURI(), which is used to construct the token uri. honestly, this seems like a
+    // weird way to do this but seems to be a good solution without making the entire contract inherit ERC721URIStorage
+    function _baseURI() internal override view returns (string memory) {
+        return _baseTokenURI;
+    }
+&nbsp;
+    // override on tokenURI function because we need to have the same metadata for all momentos, regardless of tokenID
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_exists(tokenId), "ERC721: invalid token ID");
+&nbsp;
+        if (tokenId &lt;= 888) {
+            return super.tokenURI(tokenId);
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>if (_exists(tokenId)) {
+            return bytes(_baseURI()).length &gt; 0 ? string(abi.encodePacked(_baseURI(), "memento")) : <span class="missing-if-branch" title="else path not taken" >E</span>"";
+        } else {
+<span class="cstat-no" title="statement not covered" >            require(_exists(tokenId), "ERC721: invalid token ID")</span>;
+        }
+    }
+&nbsp;
+    function getIndexedAureiCount() public view returns (uint256) {
+        return _aureindexCounter.current(); 
+    }
+&nbsp;
+    function getContractIsPaused() public view returns (bool) {
+        return _contractIsPaused;
+    }
+&nbsp;
+    function getIssuedMementoCount() public view returns (uint256) {
+        return _mementosIssuedCounter.current();
+    }
+&nbsp;
+    // returns if address is on the shitlist
+    function isOnShitlist(address questionedAddress) public view returns (bool) {
+        return _shitlist[questionedAddress]; 
+    }
+&nbsp;
+    // returns if address is on the _extendedownerlist	
+<span class="fstat-no" title="function not covered" >    function isOnExtendedOwnerList(address questionedAddress) public view returns (bool) {	</span>
+<span class="cstat-no" title="statement not covered" >        return _extendedownerlist[questionedAddress]; 	</span>
+    }
+&nbsp;
+    // returns total minted aurei
+    function getTotalAureiMinted() public view returns (uint256) {
+        return _totalAureiMinted.current();
+    }
+&nbsp;
+    // this is necessary to be able to edit the collection on opensea; it's a simple way to enable this functionality
+    // without making the entire contract inherit ERC721Ownable, which has a bunch of functions we don't need
+    function owner() public view returns (address) {
+        return _ownerAddress;
+    }
+&nbsp;
+    // returns 888 as total number of Aurei, but the contract technically mints more via Mementos	
+    function totalSupply() public view returns (uint256) {	
+        return 888;	
+    }
+&nbsp;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+&nbsp;
+    ///// Owner general management funtions
+&nbsp;
+    modifier ownerOnlyACL() {
+        require(msg.sender == _ownerAddress, "Impostors to the throne embarrass only themselves.");
+        _;
+    }
+&nbsp;
+    // extending OwnerOnlyACL in some cases to include a slightly broader set of folks	
+    modifier extendedOwnerOnlyACL() {	
+        // only MA affiliated addresses can call this function	
+        require(_extendedownerlist[msg.sender] == true, "Impostors to the throne embarrass only themselves.");	
+        _;	
+    }	
+    // Update the extended Owner list 	
+    function updateExtendedOwnerList(address _extendedOwnerAddress, bool isExtendedOwner) public <span class="missing-if-branch" title="else path not taken" >E</span>ownerOnlyACL {	
+        _extendedownerlist[_extendedOwnerAddress] = isExtendedOwner; 	
+    } 	
+&nbsp;
+    // set paused state
+    function ownerSetPausedState(bool contractIsPaused) public ownerOnlyACL {
+        _contractIsPaused = contractIsPaused;
+    }
+&nbsp;
+    // set allowlist state
+    function ownerSetAllowlistActive(bool allowlistActivityLevel) public <span class="missing-if-branch" title="else path not taken" >E</span>ownerOnlyACL {
+        _allowListActive = allowlistActivityLevel;
+    }
+&nbsp;
+    // set a new base token URI, in case metadata/image provider changes
+    function ownerSetBaseTokenURI(string memory newBaseTokenURI) public ownerOnlyACL {
+        _baseTokenURI = newBaseTokenURI;
+    }
+&nbsp;
+    // Adds a new address to the shitlist
+<span class="fstat-no" title="function not covered" >    function ownerAddToShitlist(address _shittyAddress) public ownerOnlyACL {</span>
+        _shitlist[_shittyAddress] = true; 
+    }
+&nbsp;
+    // Sets a prior shitty address to false, so it can mint again #allIsForgiven... or at least enough is forgiven
+<span class="fstat-no" title="function not covered" >    function ownerRemoveFromShitlist(address _shittyAddress) public ownerOnlyACL {</span>
+        _shitlist[_shittyAddress] = false; 
+    }
+&nbsp;
+    // Adds a new address to the allowlist
+    function ownerAddToAllowlist(address _allowAddress) public <span class="missing-if-branch" title="else path not taken" >E</span>ownerOnlyACL {
+        _allowlist[_allowAddress] = true; 
+    }
+&nbsp;
+    // Sets a prior allowed address to false, so they can't mint as part of allowlist
+<span class="fstat-no" title="function not covered" >    function ownerRemoveFromAllowlist(address _allowAddress) public ownerOnlyACL {</span>
+        _allowlist[_allowAddress] = false; 
+    }
+&nbsp;
+    // simplified withdraw function callable by only the owner that withdraws to the owner address. there are no
+    // internal state changes here, and it can only be called by owner, so this should(?) be safe from reentrancy
+<span class="fstat-no" title="function not covered" >    function ownerWithdrawContractBalance() public <span class="missing-if-branch" title="if path not taken" >I</span>ownerOnlyACL {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        uint256 balance = address(this).balance;</span>
+<span class="cstat-no" title="statement not covered" >        require(balance &gt; 0, "zpm@ says: don't waste your gas trying to withdraw a zero balance")</span>;
+&nbsp;
+        // withdraw
+<span class="cstat-no" title="statement not covered" >        (bool withdrawSuccess, ) = msg.sender.call{value: balance}("");</span>
+&nbsp;
+        // this should never happen? but including in case so all state is reverted
+<span class="cstat-no" title="statement not covered" >        require(withdrawSuccess, "zpm@ says: withdraw failed, reverting")</span>;
+&nbsp;
+    }
+&nbsp;
+    // Allows owner to change the per-wallet mint limit
+    function ownerUpdateWalletLimit(uint256 new_limit) public <span class="missing-if-branch" title="else path not taken" >E</span>ownerOnlyACL {
+        MAX_MINTABLE_AT_ONCE = new_limit; 
+    }
+&nbsp;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+&nbsp;
+    ///// Small Council token management functions 
+&nbsp;
+    // setting this to public but requiring it to be on the ownerManageList, so only MA-affiliated addresses can manage these functions	
+    function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public extendedOwnerOnlyACL {
+        // only tokens designated as owner managed can be managed by owner
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_isOwnerManaged(tokenId), "@MutantAurelius - check your token ID again. Something isn't right.");
+&nbsp;
+        // lookup current owner
+&nbsp;
+        address currentOwner = ownerOf(tokenId);
+&nbsp;
+        // only leave a memento in non-owner wallets
+        if (currentOwner != _ownerAddress) {
+            // do a leave-behind for current owner, so they 'member 
+            _mementosIssuedCounter.increment();
+            _mint(currentOwner, totalAureiSupply + getIssuedMementoCount());
+&nbsp;
+        }
+&nbsp;
+        // transfer ownership to new address; using _transfer because owner should be able to do this directly
+        _transfer(currentOwner, newOwner, tokenId);
+&nbsp;
+    }
+&nbsp;
+    function _isOwnerManaged(uint256 tokenId) internal view returns (bool) {
+        // check to see if token ID is # 1-7 or #888
+        if (tokenId &gt; 0 &amp;&amp; tokenId &lt;= initialOwnerManagedTokens || tokenId == 888) {
+            return true;
+        } else return false; 
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 19 2022 16:43:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
