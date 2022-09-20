@@ -74,7 +74,6 @@ contract MutantAureliusAurei is ERC721 {
             require(_allowlist[msg.sender] == true, "You're not on the list.");
         }
 
-        //TODO: Do we need to do a check for minimum cost to mint?
         // using tokenId = 0 to specify that we just want the next one, since solidity doens't offer optional params
         _mintAureiWithChecks(msg.sender, 0);
     }
@@ -91,12 +90,9 @@ contract MutantAureliusAurei is ERC721 {
         require(_allowlist[msg.sender] == true, "You're not on the list.");
 
         // require that favorite token is within range
-        // TODO: update text
         require(tokenId < 888, "You're trying to mint an Aureus outside the set");
 
         // require that tokenID isn't already minted()
-        // TODO: do I need to worry about a race condition here?
-        // TODO: update text
         require(!_exists(tokenId), "You have great taste; someone else has already minted your favorite.");
 
         _mintAureiWithChecks(msg.sender, tokenId);
@@ -104,14 +100,14 @@ contract MutantAureliusAurei is ERC721 {
 
     // for minting aurei w/ contract specific checks
     function _mintAureiWithChecks(address _mintAddress, uint256 tokenId) internal {
-        /// ensure we aren't minting beyond the limit
+
+        // ensure we aren't minting beyond the limit
         require(getTotalAureiMinted() < totalAureiSupply, "Many have come before you. Too many, in fact.");
 
-        /// ensure only one per wallet; current balance is zero aurei in the wallet, only enabling as courtesy
-        // TODO: make sure text is still good given update
+        // ensure only one per wallet; current balance is zero aurei in the wallet, only enabling as courtesy
         require(balanceOf(msg.sender) < MAX_MINTABLE_AT_ONCE, "One can pledge one\'s loyalty only so many times.");
 
-        /// check to make sure they're not on our shitlist
+        // check to make sure they're not on our shitlist
         require(_shitlist[_mintAddress] != true, "NONE FOR YOU");
 
         // increment before minting
@@ -141,7 +137,7 @@ contract MutantAureliusAurei is ERC721 {
             _totalAureiMinted.increment();
             _mint(_ownerAddress, mt);
         }
-        // minting femmedecentral@ token; don't incremental tokens because it'll cause numbesr to start @ 8 instead of 7 issued tokens
+        // minting femmedecentral@ token; don't incremental tokens because it'll cause numbers to start @ 8 instead of 7 issued tokens
         _totalAureiMinted.increment();
         _mint(_ownerAddress, 888);
     }
@@ -308,12 +304,11 @@ contract MutantAureliusAurei is ERC721 {
 
     // setting this to public but requiring it to be on the ownerManageList, so only MA-affiliated addresses can manage these functions	
     function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public extendedOwnerOnlyACL {
+        
         // only tokens designated as owner managed can be managed by owner
-
         require(_isOwnerManaged(tokenId), "@MutantAurelius - check your token ID again. Something isn't right.");
 
         // lookup current owner
-
         address currentOwner = ownerOf(tokenId);
 
         // only leave a memento in non-owner wallets
