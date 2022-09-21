@@ -441,8 +441,8 @@
       ]
     },
     "/Users/holmes/nfts/aurei-final/aurei-contracts/contracts/MutantAureliusAurei.sol": {
-      "lastModificationDate": 1663629576584,
-      "contentHash": "65bb5dabbba45f6a2ee688b91f0aaa12",
+      "lastModificationDate": 1663737672636,
+      "contentHash": "09310c8c1cabd749d23ff1e7aa2a84cc",
       "sourceName": "contracts/MutantAureliusAurei.sol",
       "solcConfig": {
         "version": "0.8.4",

@@ -24,7 +24,7 @@ describe("MutantAureliusAurei", function () {
   const revertStringMustBeOwner = "Impostors to the throne embarrass only themselves.";
   const revertStringContractIsPaused = "SOON";
   const revertStringMustPayMinimum = "Yo, you gotta pay at least the minimum";
-  const revertStringCannotMintThatManyAtOnce = "One can pledge one\'s loyalty only so many times.";
+  const revertStringCannotMintThatManyAtOnce = "Always leave 'em wanting more.";
   const revertStringCannotMintMoreThanMax = "Many have come before you. Too many, in fact.";
   const revertStringOwnerQueryNonexistentToken = "ERC721: owner query for nonexistent token";
   const revertStringURIQueryNonexistentToken = "ERC721Metadata: URI query for nonexistent token";
@@ -205,6 +205,42 @@ describe("MutantAureliusAurei", function () {
       await expect(
         contractAsUser1.mint()
       ).to.be.revertedWith(revertStringCannotMintThatManyAtOnce);
+
+    });
+
+
+    it("update owner acts like you'd expect", async function () {
+
+      await contractAsOwner.ownerSetPausedState(false);
+      await contractAsOwner.ownerSetAllowlistActive(false);
+
+      await contractAsOwner.updateOwner(signerUser1.address); 
+
+      expect(
+        await contractReadOnly.owner()
+      ).to.equal(BigNumber.from(signerUser1.address)); // user 1 should now be the owner
+
+      await contractAsUser1.ownerSetBaseTokenURI("ipfs://immauser/"); 
+
+      expect(
+        await contractReadOnly.tokenURI(1)
+      ).to.equal("ipfs://immauser/1"); // user1 should successfully change the URL
+
+      await expect(
+        contractAsOwner.ownerSetBaseTokenURI("ipfs://canhazbacknowmaybe/") // original owner doing calls should fail
+      ).to.be.revertedWith(revertStringMustBeOwner);
+
+      await contractAsUser1.updateOwner(signerOwner.address); // now switch back to original owner
+
+      await contractAsOwner.ownerSetBaseTokenURI('ipfs://itsminenow/'); 
+
+      expect(
+        await contractReadOnly.tokenURI(1)
+      ).to.equal("ipfs://itsminenow/1"); // original should successfully change the URL
+
+      await expect(
+        contractAsUser1.ownerSetBaseTokenURI("ipfs://itwasabeautifultimeinthesun/") // original owner doing calls should fail
+      ).to.be.revertedWith(revertStringMustBeOwner);
 
     });
 
@@ -489,7 +525,7 @@ describe("MutantAureliusAurei", function () {
   
       await expect(
         contractAsUser1.mintFavorite(888)
-      ).to.be.revertedWith(revertStringMintFavoriteOutsideSet);
+      ).to.be.revertedWith(revertStringAureusAlreadyMinted);
   
       expect(
         await contractReadOnly.balanceOf(signerUser1.address)

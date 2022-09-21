@@ -90,7 +90,7 @@ contract MutantAureliusAurei is ERC721 {
         require(_allowlist[msg.sender] == true, "You're not on the list.");
 
         // require that favorite token is within range
-        require(tokenId < 888, "You're trying to mint an Aureus outside the set");
+        require(tokenId <= 888, "You're trying to mint an Aureus outside the set");
 
         // require that tokenID isn't already minted()
         require(!_exists(tokenId), "You have great taste; someone else has already minted your favorite.");
@@ -105,7 +105,7 @@ contract MutantAureliusAurei is ERC721 {
         require(getTotalAureiMinted() < totalAureiSupply, "Many have come before you. Too many, in fact.");
 
         // ensure only one per wallet; current balance is zero aurei in the wallet, only enabling as courtesy
-        require(balanceOf(msg.sender) < MAX_MINTABLE_AT_ONCE, "One can pledge one\'s loyalty only so many times.");
+        require(balanceOf(msg.sender) < MAX_MINTABLE_AT_ONCE, "Always leave 'em wanting more.");
 
         // check to make sure they're not on our shitlist
         require(_shitlist[_mintAddress] != true, "NONE FOR YOU");
@@ -238,10 +238,16 @@ contract MutantAureliusAurei is ERC721 {
         require(_extendedownerlist[msg.sender] == true, "Impostors to the throne embarrass only themselves.");	
         _;	
     }	
+
     // Update the extended Owner list 	
     function updateExtendedOwnerList(address _extendedOwnerAddress, bool isExtendedOwner) public ownerOnlyACL {	
         _extendedownerlist[_extendedOwnerAddress] = isExtendedOwner; 	
     } 	
+
+    // change who the owner is
+    function updateOwner(address _newOwnerAddress) public ownerOnlyACL {
+        _ownerAddress = _newOwnerAddress; 
+    }
 
     // set paused state
     function ownerSetPausedState(bool contractIsPaused) public ownerOnlyACL {
