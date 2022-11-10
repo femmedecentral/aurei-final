@@ -7,6 +7,18 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+/*
+
+from femmedecentral@ and mutantaurelius@
+
+  creators of the NFT mechanics:
+    - "owner managed tokens" - tokens that can be moved to wallets exclusively by owner, and a momento is left behind. Inspired by https://theworm.wtf/
+    - "shitlist" - wallets that cannot mint or own. sometimes there are consequences. 
+
+if you'd like to understand the full development stack, find the whole coding suite at: https://github.com/femmedecentral
+
+*/
+
 contract MutantAureliusAurei is ERC721 {
 
     // counters is a safe way of counting that can only be +/- by one
@@ -39,9 +51,8 @@ contract MutantAureliusAurei is ERC721 {
 
     constructor() ERC721("Mutant Aurelius Aurei", "MAA") {
         
-        //TODO: update with real IPFS link
-        _baseTokenURI = "ipfs://loremipsum/";
-        _ownerAddress = msg.sender; // deployer is permanent owner
+        _baseTokenURI = "ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/";
+        _ownerAddress = msg.sender; // deployer is owner
 
         // shitlist addresses at time of contract deploy
         _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
@@ -64,6 +75,7 @@ contract MutantAureliusAurei is ERC721 {
     }
 
     // public function to mint aurei; mints the next available Aureus
+    // NOTE: this function should be made payable if you want to have a non-free mint
     function mint() public {
         
         // require that contract isn't paused when minting
@@ -289,13 +301,13 @@ contract MutantAureliusAurei is ERC721 {
     function ownerWithdrawContractBalance() public ownerOnlyACL {
 
         uint256 balance = address(this).balance;
-        require(balance > 0, "zpm@ says: don't waste your gas trying to withdraw a zero balance");
+        require(balance > 0, "don't waste your gas trying to withdraw a zero balance");
 
         // withdraw
         (bool withdrawSuccess, ) = msg.sender.call{value: balance}("");
 
         // this should never happen? but including in case so all state is reverted
-        require(withdrawSuccess, "zpm@ says: withdraw failed, reverting");
+        require(withdrawSuccess, "withdraw failed, reverting");
 
     }
 
@@ -306,13 +318,13 @@ contract MutantAureliusAurei is ERC721 {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ///// Small Council token management functions 
+    ///// Owner managed token: specific management functions 
 
-    // setting this to public but requiring it to be on the ownerManageList, so only MA-affiliated addresses can manage these functions	
+    // setting this to public but requiring it to be on the ownerManageList, so only affiliated addresses can manage these functions	
     function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public extendedOwnerOnlyACL {
         
         // only tokens designated as owner managed can be managed by owner
-        require(_isOwnerManaged(tokenId), "@MutantAurelius - check your token ID again. Something isn't right.");
+        require(_isOwnerManaged(tokenId), "Check your token ID again. Something isn't right.");
 
         // lookup current owner
         address currentOwner = ownerOf(tokenId);

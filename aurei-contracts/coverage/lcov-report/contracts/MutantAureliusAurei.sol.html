@@ -382,7 +382,30 @@
 337
 338
 339
-340</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -444,6 +467,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">132×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -730,6 +754,18 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 &nbsp;
+/*
+&nbsp;
+from femmedecentral@ and mutantaurelius@
+&nbsp;
+  creators of the NFT mechanics:
+    - "owner managed tokens" - tokens that can be moved to wallets exclusively by owner, and a momento is left behind. Inspired by https://theworm.wtf/
+    - "shitlist" - wallets that cannot mint or own. sometimes there are consequences. 
+&nbsp;
+if you'd like to understand the full development stack, find the whole coding suite at: https://github.com/femmedecentral
+&nbsp;
+*/
+&nbsp;
 contract MutantAureliusAurei is ERC721 {
 &nbsp;
     // counters is a safe way of counting that can only be +/- by one
@@ -762,9 +798,8 @@ contract MutantAureliusAurei is ERC721 {
 &nbsp;
     constructor() ERC721("Mutant Aurelius Aurei", "MAA") {
         
-        //TODO: update with real IPFS link
-        _baseTokenURI = "ipfs://loremipsum/";
-        _ownerAddress = msg.sender; // deployer is permanent owner
+        _baseTokenURI = "ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/";
+        _ownerAddress = msg.sender; // deployer is owner
 &nbsp;
         // shitlist addresses at time of contract deploy
         _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
@@ -787,6 +822,7 @@ contract MutantAureliusAurei is ERC721 {
     }
 &nbsp;
     // public function to mint aurei; mints the next available Aureus
+    // NOTE: this function should be made payable if you want to have a non-free mint
     function mint() public {
         
         // require that contract isn't paused when minting
@@ -1012,13 +1048,13 @@ contract MutantAureliusAurei is ERC721 {
 <span class="fstat-no" title="function not covered" >    function ownerWithdrawContractBalance() public <span class="missing-if-branch" title="if path not taken" >I</span>ownerOnlyACL {</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        uint256 balance = address(this).balance;</span>
-<span class="cstat-no" title="statement not covered" >        require(balance &gt; 0, "zpm@ says: don't waste your gas trying to withdraw a zero balance")</span>;
+<span class="cstat-no" title="statement not covered" >        require(balance &gt; 0, "don't waste your gas trying to withdraw a zero balance")</span>;
 &nbsp;
         // withdraw
 <span class="cstat-no" title="statement not covered" >        (bool withdrawSuccess, ) = msg.sender.call{value: balance}("");</span>
 &nbsp;
         // this should never happen? but including in case so all state is reverted
-<span class="cstat-no" title="statement not covered" >        require(withdrawSuccess, "zpm@ says: withdraw failed, reverting")</span>;
+<span class="cstat-no" title="statement not covered" >        require(withdrawSuccess, "withdraw failed, reverting")</span>;
 &nbsp;
     }
 &nbsp;
@@ -1029,13 +1065,13 @@ contract MutantAureliusAurei is ERC721 {
 &nbsp;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 &nbsp;
-    ///// Small Council token management functions 
+    ///// Owner managed token: specific management functions 
 &nbsp;
-    // setting this to public but requiring it to be on the ownerManageList, so only MA-affiliated addresses can manage these functions	
+    // setting this to public but requiring it to be on the ownerManageList, so only affiliated addresses can manage these functions	
     function ownerSetNewTokenOwner(uint256 tokenId, address newOwner) public extendedOwnerOnlyACL {
         
         // only tokens designated as owner managed can be managed by owner
-        <span class="missing-if-branch" title="else path not taken" >E</span>require(_isOwnerManaged(tokenId), "@MutantAurelius - check your token ID again. Something isn't right.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_isOwnerManaged(tokenId), "Check your token ID again. Something isn't right.");
 &nbsp;
         // lookup current owner
         address currentOwner = ownerOf(tokenId);
@@ -1066,7 +1102,7 @@ contract MutantAureliusAurei is ERC721 {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 20 2022 22:29:11 GMT-0700 (Pacific Daylight Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Nov 10 2022 10:23:16 GMT-0800 (Pacific Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

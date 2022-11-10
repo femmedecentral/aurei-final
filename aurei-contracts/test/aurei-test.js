@@ -28,7 +28,7 @@ describe("MutantAureliusAurei", function () {
   const revertStringCannotMintMoreThanMax = "Many have come before you. Too many, in fact.";
   const revertStringOwnerQueryNonexistentToken = "ERC721: owner query for nonexistent token";
   const revertStringURIQueryNonexistentToken = "ERC721Metadata: URI query for nonexistent token";
-  const revertStringDontWithdrawZeroBalance = "Yo, don't waste your gas trying to withdraw a zero balance";
+  const revertStringDontWithdrawZeroBalance = "don't waste your gas trying to withdraw a zero balance";
   const revertStringCantTransferWhilePaused = "Yo, can't transfer a token when the contract is paused";
   const revertStringShitList = "NONE FOR YOU";
   const revertStringforAttemptedOwnerManageTransfer = "Only Mutant Aurelius can bestow owner his favor upon the masses.";
@@ -113,7 +113,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(1)
-      ).to.equal("ipfs://loremipsum/1");
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/1");
 
     });
 
@@ -586,7 +586,6 @@ describe("MutantAureliusAurei", function () {
     });
 
 // TODO: can owner use transferFrom for managed only tokens? Probably doens't leave behind a memento... but do we want to make possible?
-// TODO: just test simple owner token transfer
 
     it("owner can transfer owner-managed token to user 1", async function() {
   
@@ -684,7 +683,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://loremipsum/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
   
     });
 
@@ -713,11 +712,11 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://loremipsum/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
 
       expect(
         await contractReadOnly.tokenURI(890)
-      ).to.equal("ipfs://loremipsum/memento"); // check that 2nd memento has the same memento metadata
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 2nd memento has the same memento metadata
   
     });
 
@@ -956,7 +955,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(888)
-      ).to.equal("ipfs://loremipsum/888"); // check that tokenURIs are working well
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/888"); // check that tokenURIs are working well
 
       // TODO: Not sure why this check isn't working; all calls to non-existant tokens aren't reverting correctly
       //expect(
@@ -970,11 +969,11 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://loremipsum/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
 
       expect(
         await contractReadOnly.tokenURI(890)
-      ).to.equal("ipfs://loremipsum/memento"); // check that 2nd memento has the same memento metadata
+      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 2nd memento has the same memento metadata
 
     });
 
