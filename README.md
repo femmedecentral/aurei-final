@@ -22,5 +22,5 @@
  3) The shitlist can be updated at any given time
 
  In case anyone would like to use these mechanics in the future, we're introducing two NFT mechanics features:
-     - "owner managed tokens" - tokens that can be moved to wallets exclusively by owner, and a momento is left behind. Inspired by https://theworm.wtf/
-    - "shitlist" - an updatable list of wallets that cannot mint or own. sometimes there are consequences. 
+ 1) "owner managed tokens" - tokens that can be moved to wallets exclusively by owner, and a momento is left behind. Inspired by https://theworm.wtf/
+ 2) "shitlist" - an updatable list of wallets that cannot mint or own. sometimes there are consequences. 
