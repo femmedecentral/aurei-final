@@ -113,7 +113,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(1)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/1");
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/1");
 
     });
 
@@ -683,7 +683,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/memento"); // check that 1st memento has memento metadata
   
     });
 
@@ -712,11 +712,11 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/memento"); // check that 1st memento has memento metadata
 
       expect(
         await contractReadOnly.tokenURI(890)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 2nd memento has the same memento metadata
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/memento"); // check that 2nd memento has the same memento metadata
   
     });
 
@@ -955,7 +955,7 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(888)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/888"); // check that tokenURIs are working well
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/888"); // check that tokenURIs are working well
 
       // TODO: Not sure why this check isn't working; all calls to non-existant tokens aren't reverting correctly
       //expect(
@@ -969,11 +969,11 @@ describe("MutantAureliusAurei", function () {
 
       expect(
         await contractReadOnly.tokenURI(889)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 1st memento has memento metadata
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/memento"); // check that 1st memento has memento metadata
 
       expect(
         await contractReadOnly.tokenURI(890)
-      ).to.equal("ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/memento"); // check that 2nd memento has the same memento metadata
+      ).to.equal("ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/memento"); // check that 2nd memento has the same memento metadata
 
     });
 

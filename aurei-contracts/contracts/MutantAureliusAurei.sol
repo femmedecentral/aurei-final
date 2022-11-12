@@ -13,7 +13,7 @@ from femmedecentral@ and mutantaurelius@
 
   creators of the NFT mechanics:
     - "owner managed tokens" - tokens that can be moved to wallets exclusively by owner, and a momento is left behind. Inspired by https://theworm.wtf/
-    - "shitlist" - wallets that cannot mint or own. sometimes there are consequences. 
+    - "shitlist" - an updatable list of wallets that cannot mint or own. sometimes there are consequences. 
 
 if you'd like to understand the full development stack, find the whole coding suite at: https://github.com/femmedecentral
 
@@ -51,13 +51,37 @@ contract MutantAureliusAurei is ERC721 {
 
     constructor() ERC721("Mutant Aurelius Aurei", "MAA") {
         
-        _baseTokenURI = "ipfs://QmVRWikQGdJXjMHSVs428mfZyJuqvPdxTKfhWtWzah1W7K/";
+        _baseTokenURI = "ipfs://QmVEN6zbeyo2mhVKwm6bd2DWBLFFnGLXQGuKyQEtLCVWwV/";
         _ownerAddress = msg.sender; // deployer is owner
 
         // shitlist addresses at time of contract deploy
         _shitlist[0x7d4c4d5380Ca2F9C7A091bb622B80613da7Eae8C] = true; // soby.eth
         _shitlist[0x385375FD99D6019c630b1315D3815BB162Aa039e] = true; // soby.eth
+        _shitlist[0x7683eBB2190a3BCCab1203773E0df54283Df1D5C] = true; // soby.eth
         _shitlist[0x90F79bf6EB2c4f870365E785982E1f101E93b906] = true; // for testing purposes
+
+        // it's a little hacky to do this like this, but I didn't want to build a frontend or spend more on gas
+        _allowlist[0xf5324Be5dB41Ba9e464E14F3940ECCDE98993682] = true; 
+        _allowlist[0xbD6907023e8129C6219536C1Bf2e7FB9e0CEd8E1] = true; 
+        _allowlist[0x0BffF40545a2250c3f11993e7B75dbbcB11e36ac] = true; 
+        _allowlist[0xef21C2D39f4d7d7A2Ea698043AFFa888c1295cD3] = true; 
+        _allowlist[0xb0C63F8e0264A05421F2f4FC7F68B578c5e700D6] = true; 
+        _allowlist[0x866F74c2c65D230CB6a4ceA159daa5996377F81d] = true; 
+        _allowlist[0xe5e06284E9041428Dc3D4506Aeea5D59e91dd514] = true; 
+        _allowlist[0xDf6d32981752C438a8AdFc801576e4e4dAc204C0] = true; 
+        _allowlist[0x68D4A6fAD7b5682dB97C0a4455e282cE4f193bE6] = true; 
+        _allowlist[0xfdF3df1c1bBE75E33C33B3335A305Ff7233479Fa] = true; 
+        _allowlist[0x205443BF37BA94c0cD58F0B53611E17A5502085D] = true; 
+        _allowlist[0x3EB62c8aa2aC0315f7967C765b62DBbc30DA771b] = true; 
+        _allowlist[0x5Bf3E69eA5359F739f8239278210b371Bc220582] = true; 
+        _allowlist[0x8C062bC26b5f976D3F59c1251e8B6EbcB120f091] = true; 
+        _allowlist[0x407d6475Bf21BC1c328e2D48003B86cc4F5FF51F] = true; 
+        _allowlist[0x6444D68647760C75df9Da50176eEED944628046C] = true; 
+        _allowlist[0x0707D3b48f7d810C96C4B348DC4A1d8086e576ef] = true; 
+        _allowlist[0xaD8ae856E7cA9E62BdCdC2c1E812ff46C9dcea1f] = true; 
+        _allowlist[0x3376b95e03C1B03bC408DbCb4e9734f4456932df] = true; 
+        _allowlist[0x1afa798e2185e38411084BB6D7E5DAb975f032c8] = true; 
+        //_allowlist[] = true; 
 
         // list of folks who can manage owner-managed tokens	
         _extendedownerlist[_ownerAddress] = true;	
